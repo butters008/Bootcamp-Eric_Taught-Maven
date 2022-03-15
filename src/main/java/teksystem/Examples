@@ -1,0 +1,48 @@
+First way of writing to DB
+
+package teksystem;
+
+
+import teksystem.database.entity.Actor;
+import teksystem.database.entity.Movie;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class HibernateDemo {
+
+    private static final String PERSISTENCE_UNIT_NAME = "moviesdb";
+    private static EntityManagerFactory emFactoryObj =
+            Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+    public static void main(String[] args) {
+        // these 2 lines of code are boiler plate
+        EntityManager entityMgr = emFactoryObj.createEntityManager();
+        entityMgr.getTransaction().begin();
+
+        // create an actor object
+//        Actor actor = new Actor();
+//        actor.setFirstName("Someone");
+//        actor.setLastName("Else");
+//        actor.setAge(27);
+
+        Movie movie = new Movie();
+        movie.setTitle("Star Wars Episode 9");
+        movie.setDescription("Skywalker sags comes to an end...maybe");
+//        movie.setReleaseDate();
+//        movie.setCreateDate();
+
+        // save the actor to the database
+//        entityMgr.persist(actor);
+        entityMgr.persist(movie);
+
+        // commit the transaction
+        entityMgr.getTransaction().commit();
+
+        entityMgr.clear();
+
+        System.out.println("Record Successfully Inserted In The Database");
+    }
+}
+---------------------------------------------------------------------------------------------------------------------------
